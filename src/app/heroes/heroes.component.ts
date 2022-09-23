@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero.model';
 import { HeroService } from '../hero.service';
-import { HEROES } from '../mock-hero';
 
 @Component({
   selector: 'app-heroes',
@@ -9,7 +8,7 @@ import { HEROES } from '../mock-hero';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Hero[] = [];
+  heroes: Hero[] = []; //heroes é do tipo Hero. Hero é iniciado vazia
   selectedHero?: Hero;
 
   constructor(private heroService: HeroService) {}
@@ -19,7 +18,7 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 
   onSelect(hero: Hero): void {
